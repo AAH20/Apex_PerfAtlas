@@ -54,6 +54,19 @@ def validate(record: dict, artifact_root: Path) -> list[str]:
         issues.append("frame integrity policy unknown")
     if record["evidence"]["environment"] == "not_run":
         issues.append("measured claim has no execution environment")
+    if record["evidence"]["implementation"] in {"design_only", "stub"}:
+        issues.append("designs and stubs cannot be valid measured implementations")
+    method=record["measurement"]["method"]
+    if method == "simulation":
+        if record["evidence"]["environment"] != "simulator":
+            issues.append("simulation method requires simulator environment")
+        if any(m["unit"] == "ns" for m in record["metrics"]):
+            issues.append("v0 simulation profiles cannot claim nanosecond hardware latency")
+    elif record["evidence"]["environment"] == "simulator":
+        issues.append("simulator environment requires simulation method")
+    if method in {"software_clock", "internal_counter", "external_instrument"}:
+        if record["measurement"]["clock_artifact"] not in artifacts or record["measurement"]["resolution_ns"] is None:
+            issues.append("timed measurement requires clock artifact and declared resolution")
     if record["measurement"]["method"] == "external_instrument":
         for field in ("calibration_artifact", "clock_artifact", "uncertainty_artifact"):
             if record["measurement"][field] not in artifacts:

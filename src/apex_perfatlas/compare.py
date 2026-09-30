@@ -15,6 +15,9 @@ def compare(baseline: dict, candidate: dict, baseline_root: Path, candidate_root
     for key in ("id", "version", "kind", "spec_sha256", "input_sha256", "semantics", "frame_integrity_policy"):
         if baseline["workload"][key] != candidate["workload"][key]:
             reasons.append(f"workload differs: {key}")
+    if baseline["evidence"]["environment"] == "simulator" or candidate["evidence"]["environment"] == "simulator":
+        if baseline["evidence"]["environment"] != candidate["evidence"]["environment"]:
+            reasons.append("simulation and physical execution cannot be compared")
     for key in ("method", "start_boundary", "stop_boundary", "resolution_ns", "warmup_policy", "sampling_policy"):
         if baseline["measurement"][key] != candidate["measurement"][key]:
             reasons.append(f"measurement differs: {key}")

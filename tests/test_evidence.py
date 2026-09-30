@@ -17,10 +17,10 @@ def run(tmp_path):
     record["provenance"].update(repository_url="https://example.invalid/test-fixture",commit="a"*40,dirty=False,config_sha256="b"*64)
     record["workload"].update(spec_sha256="c"*64,input_sha256="d"*64,frame_integrity_policy="not_applicable")
     record["evidence"].update(implementation="software",environment="cpu")
-    record["measurement"].update(method="software_clock",start_boundary="fixture start",stop_boundary="fixture stop",sample_count=4)
+    record["measurement"].update(method="software_clock",start_boundary="fixture start",stop_boundary="fixture stop",sample_count=4,clock_artifact="clock",resolution_ns=1)
     record["platform"].update(inventory_artifact="inventory",implementation_artifact="build",transport_backend="in_memory",backend_status="simulated")
     record["traffic"].update(offered_count=4,accepted_count=4,completed_count=4,rejected_count=0,dropped_count=0,duplicate_output_count=0,wrong_output_count=0,unresolved_count=0)
-    for name,role,data in (("inventory","platform_inventory",{"test_fixture":True}),("build","implementation",{"test_fixture":True}),("samples","chronological_latency_samples_ns",[1,100,1,100]),("config","configuration",{"config":1}),("workload","workload",{"workload":1}),("input","input",{"input":1})):
+    for name,role,data in (("inventory","platform_inventory",{"test_fixture":True}),("build","implementation",{"test_fixture":True}),("samples","chronological_latency_samples_ns",[1,100,1,100]),("config","configuration",{"config":1}),("workload","workload",{"workload":1}),("input","input",{"input":1}),("clock","clock",{"resolution_ns":1,"fixture":True})):
         path=tmp_path/(name+".json");path.write_text(json.dumps(data))
         record["artifacts"].append({"id":name,"role":role,"location":path.name,"sha256":digest(path),"visibility":"public"})
     record["provenance"]["config_sha256"]=digest(tmp_path/"config.json")
@@ -100,3 +100,11 @@ def test_missing_provenance_binding_rejected(run,tmp_path,field):
 def test_unaccounted_rate_rejected(run,tmp_path):
     run["metrics"]=[{"id":"rate","value":4,"unit":"events/s","statistic":"rate","population":"fixture","direction":"higher"}]
     assert any("retained accounting" in item for item in validate(run,tmp_path))
+
+
+@pytest.mark.parametrize("change",["stub","simulation","clock"])
+def test_execution_class_is_enforced(run,tmp_path,change):
+    if change=="stub":run["evidence"]["implementation"]="stub"
+    elif change=="simulation":run["evidence"]["environment"]="simulator";run["measurement"]["method"]="simulation"
+    else:run["measurement"]["clock_artifact"]=None
+    assert validate(run,tmp_path)
