@@ -26,7 +26,7 @@ An ineligible comparison exits with status 2 and lists the reasons. A design-onl
 
 Accounting in v0 is `offered = accepted + rejected + dropped` and `accepted = completed + unresolved`. Wrong and duplicate outputs are violations. The initial comparison profile additionally requires zero rejection, loss and unresolved work. Other benchmark profiles must define their own accounting and acceptable traffic policy before support is added.
 
-Quantiles use nearest-rank order statistics. Observed maxima are finite-run observations. Warmup and sampling policy are compared; no automatic tail trimming or statistical-significance claim is made. External-instrument records require real backend, calibration, clock and uncertainty artifacts. Copy, simulation and hardware measurements retain separate identities.
+Quantiles use nearest-rank order statistics. Observed maxima are finite-run observations. Unknown CPU/device identity blocks measured comparison eligibility even when an explicitly limited observation record is internally consistent. Equal inventory hashes mean equal declared platform metadata, not authenticated identity of a particular physical host. Warmup and sampling policy are compared; no automatic tail trimming or statistical-significance claim is made. External-instrument records require real backend, calibration, clock and uncertainty artifacts. Copy, simulation and hardware measurements retain separate identities.
 
 ## Public STAC coverage
 

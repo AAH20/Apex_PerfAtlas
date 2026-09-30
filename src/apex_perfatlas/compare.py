@@ -1,5 +1,6 @@
 """Metric-specific eligibility, with explicit system changes."""
 from __future__ import annotations
+import json
 from pathlib import Path
 from .evidence import validate
 
@@ -28,6 +29,18 @@ def compare(baseline: dict, candidate: dict, baseline_root: Path, candidate_root
         t=record["traffic"]
         if t["dropped_count"] or t["unresolved_count"] or t["rejected_count"]:
             reasons.append("v0 comparison requires zero drops, unresolved operations and rejections")
+    for label, record, root in (("baseline", baseline, baseline_root), ("candidate", candidate, candidate_root)):
+        environment=record["evidence"]["environment"]
+        required_identity={"cpu":"cpu", "fpga":"device", "asic":"device"}.get(environment)
+        if required_identity:
+            inventory_entry=next(a for a in record["artifacts"] if a["id"]==record["platform"]["inventory_artifact"])
+            try:
+                inventory=json.loads((root/inventory_entry["location"]).read_text())
+                identity=inventory.get(required_identity)
+                if not isinstance(identity,str) or not identity.strip() or identity.strip().lower().startswith(("unknown","unresolved","not specified")):
+                    reasons.append(f"{label}: platform {required_identity} identity is unknown")
+            except (OSError,ValueError,AttributeError):
+                reasons.append(f"{label}: unreadable platform inventory")
     def artifact_hash(record, identifier):
         return next(a["sha256"] for a in record["artifacts"] if a["id"] == identifier)
     platform_changed = artifact_hash(baseline, baseline["platform"]["inventory_artifact"]) != artifact_hash(candidate, candidate["platform"]["inventory_artifact"])
@@ -49,6 +62,6 @@ def compare(baseline: dict, candidate: dict, baseline_root: Path, candidate_root
             "observed_improvement": delta<0 if metric["direction"]=="lower" else delta>0 if metric["direction"]=="higher" else None})
     if set(base) != {m["id"] for m in candidate["metrics"]}:
         reasons.append("metric sets differ")
-    return {"eligible": not reasons, "comparison_type": "cross_platform_system_comparison" if platform_changed else "same_platform_regression",
+    return {"eligible": not reasons, "comparison_type": "cross_platform_system_comparison" if platform_changed else "same_declared_platform_regression",
         "reasons": reasons, "metrics": output if not reasons else [],
         "interpretation": "Observed differences only; no statistical significance, external validation or record-win inference."}
