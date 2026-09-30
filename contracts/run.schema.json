@@ -1,0 +1,681 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Apex run evidence envelope version 0.1",
+  "description": "Structural contract; semantic validation, artifact verification and comparison eligibility are required separately.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "status",
+    "claim_kind",
+    "provenance",
+    "workload",
+    "platform",
+    "evidence",
+    "measurement",
+    "traffic",
+    "metrics",
+    "artifacts",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "not_run",
+        "incomplete",
+        "invalid",
+        "valid"
+      ]
+    },
+    "claim_kind": {
+      "enum": [
+        "target",
+        "estimate",
+        "measured"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository_url",
+        "commit",
+        "dirty",
+        "config_sha256",
+        "recorded_at",
+        "sources"
+      ],
+      "properties": {
+        "repository_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "commit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "dirty": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "config_sha256": {
+          "$ref": "#/$defs/nullableHash"
+        },
+        "recorded_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "workload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "kind",
+        "spec_sha256",
+        "input_sha256",
+        "rights",
+        "semantics",
+        "frame_integrity_policy"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "open",
+            "synthetic",
+            "licensed_benchmark"
+          ]
+        },
+        "spec_sha256": {
+          "$ref": "#/$defs/nullableHash"
+        },
+        "input_sha256": {
+          "$ref": "#/$defs/nullableHash"
+        },
+        "rights": {
+          "enum": [
+            "public_redistributable",
+            "private_authorized",
+            "unresolved"
+          ]
+        },
+        "semantics": {
+          "type": "string",
+          "minLength": 1
+        },
+        "frame_integrity_policy": {
+          "enum": [
+            "validate_before_action",
+            "early_action_before_fcs",
+            "not_applicable",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inventory_artifact",
+        "implementation_artifact",
+        "transport_backend",
+        "backend_status"
+      ],
+      "properties": {
+        "inventory_artifact": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "implementation_artifact": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transport_backend": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "backend_status": {
+          "enum": [
+            "not_present",
+            "stub",
+            "simulated",
+            "real"
+          ]
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "implementation",
+        "environment",
+        "validation",
+        "validation_receipt"
+      ],
+      "properties": {
+        "implementation": {
+          "enum": [
+            "design_only",
+            "stub",
+            "software",
+            "rtl_simulation",
+            "rtl_synthesis",
+            "placed_and_routed",
+            "silicon"
+          ]
+        },
+        "environment": {
+          "enum": [
+            "not_run",
+            "simulator",
+            "cpu",
+            "fpga",
+            "asic"
+          ]
+        },
+        "validation": {
+          "enum": [
+            "none",
+            "internal_review",
+            "independent_review",
+            "independent_measurement",
+            "published_stac_report"
+          ]
+        },
+        "validation_receipt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "start_boundary",
+        "stop_boundary",
+        "clock_artifact",
+        "calibration_artifact",
+        "resolution_ns",
+        "uncertainty_artifact",
+        "warmup_policy",
+        "sampling_policy",
+        "sample_count"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "none",
+            "software_clock",
+            "internal_counter",
+            "external_instrument",
+            "simulation"
+          ]
+        },
+        "start_boundary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "stop_boundary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "clock_artifact": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "calibration_artifact": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "resolution_ns": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "uncertainty_artifact": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "warmup_policy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sampling_policy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sample_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "traffic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schedule_artifact",
+        "offered_count",
+        "accepted_count",
+        "completed_count",
+        "rejected_count",
+        "dropped_count",
+        "duplicate_output_count",
+        "wrong_output_count",
+        "unresolved_count"
+      ],
+      "properties": {
+        "schedule_artifact": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "offered_count": {
+          "$ref": "#/$defs/nullableCount"
+        },
+        "accepted_count": {
+          "$ref": "#/$defs/nullableCount"
+        },
+        "completed_count": {
+          "$ref": "#/$defs/nullableCount"
+        },
+        "rejected_count": {
+          "$ref": "#/$defs/nullableCount"
+        },
+        "dropped_count": {
+          "$ref": "#/$defs/nullableCount"
+        },
+        "duplicate_output_count": {
+          "$ref": "#/$defs/nullableCount"
+        },
+        "wrong_output_count": {
+          "$ref": "#/$defs/nullableCount"
+        },
+        "unresolved_count": {
+          "$ref": "#/$defs/nullableCount"
+        }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "value",
+          "unit",
+          "statistic",
+          "population",
+          "direction"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "enum": [
+              "ns",
+              "us",
+              "s",
+              "events/s",
+              "messages/s",
+              "orders/s",
+              "bytes/s",
+              "Gbps",
+              "J/op",
+              "W",
+              "count",
+              "ratio"
+            ]
+          },
+          "statistic": {
+            "enum": [
+              "minimum",
+              "maximum_observed",
+              "mean",
+              "p50",
+              "p90",
+              "p99",
+              "p99.9",
+              "p99.99",
+              "rate",
+              "total"
+            ]
+          },
+          "population": {
+            "type": "string",
+            "minLength": 1
+          },
+          "direction": {
+            "enum": [
+              "lower",
+              "higher",
+              "context"
+            ]
+          }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "role",
+          "sha256",
+          "location",
+          "visibility"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "location": {
+            "type": "string",
+            "minLength": 1
+          },
+          "visibility": {
+            "enum": [
+              "public",
+              "private_authorized",
+              "withheld"
+            ]
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$defs": {
+    "nullableHash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nullableCount": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "valid"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "claim_kind": {
+            "const": "measured"
+          },
+          "metrics": {
+            "minItems": 1
+          },
+          "measurement": {
+            "properties": {
+              "sample_count": {
+                "minimum": 1
+              }
+            }
+          },
+          "evidence": {
+            "properties": {
+              "environment": {
+                "not": {
+                  "const": "not_run"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "not_run"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "metrics": {
+            "maxItems": 0
+          },
+          "measurement": {
+            "properties": {
+              "method": {
+                "const": "none"
+              },
+              "sample_count": {
+                "const": 0
+              }
+            }
+          },
+          "evidence": {
+            "properties": {
+              "environment": {
+                "const": "not_run"
+              },
+              "validation": {
+                "const": "none"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "claim_kind": {
+            "const": "measured"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "enum": [
+              "incomplete",
+              "invalid",
+              "valid"
+            ]
+          },
+          "provenance": {
+            "properties": {
+              "repository_url": {
+                "type": "string",
+                "minLength": 1
+              },
+              "commit": {
+                "type": "string"
+              },
+              "dirty": {
+                "type": "boolean"
+              },
+              "config_sha256": {
+                "type": "string"
+              }
+            }
+          },
+          "workload": {
+            "properties": {
+              "spec_sha256": {
+                "type": "string"
+              },
+              "input_sha256": {
+                "type": "string"
+              }
+            }
+          },
+          "measurement": {
+            "properties": {
+              "method": {
+                "not": {
+                  "const": "none"
+                }
+              },
+              "start_boundary": {
+                "type": "string",
+                "minLength": 1
+              },
+              "stop_boundary": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "artifacts": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "workload": {
+            "properties": {
+              "kind": {
+                "const": "licensed_benchmark"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "workload": {
+            "properties": {
+              "rights": {
+                "const": "private_authorized"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "evidence": {
+            "properties": {
+              "validation": {
+                "enum": [
+                  "independent_review",
+                  "independent_measurement",
+                  "published_stac_report"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidence": {
+            "properties": {
+              "validation_receipt": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

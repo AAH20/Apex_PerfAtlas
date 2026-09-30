@@ -1,0 +1,15 @@
+{
+  "currency": "USD",
+  "initial_investment": 100000,
+  "annual_opex": 10000,
+  "annual_incremental_revenue": 60000,
+  "annual_incident_rate": 0.005,
+  "hours_per_incident": 2,
+  "loss_per_hour": 50000,
+  "years": 5,
+  "discount_rate": 0.1,
+  "residual_value": 0,
+  "input_provenance": {
+    "all_numbers": "Illustrative assumptions; no vendor quote or customer observation"
+  }
+}

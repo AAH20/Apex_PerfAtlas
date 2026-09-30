@@ -1,0 +1,23 @@
+flowchart TB
+  SRC["Public sources and authorized private records"] --> CAT["Versioned benchmark, hardware, library and cost catalogue"]
+  ULL["Apex_ULL native run artifacts"] --> ING["Evidence ingestion<br/>Hashes, rights, units and provenance"]
+  TICK["Apex_Tick RTL-simulation artifacts; physical FPGA runs gated"] --> ING
+  DOMAIN["Candidate independent portfolio adapters"] --> ING
+  ING --> VAL["Structural and semantic validation"]
+  VAL -->|"Invalid or incomplete"| REJ["Visible rejection reasons<br/>Excluded from measured wins"]
+  VAL -->|"Valid evidence"| RUN["Local run files; hosted registry planned"]
+  CAT --> CMP["Comparison eligibility<br/>Semantics, boundaries, precision and traffic"]
+  RUN --> CMP
+  CMP -->|"Ineligible"| REJ
+  CMP -->|"Compatible with declared differences"| FEAS["Hardware and software feasibility<br/>Access, timing, resources and constraints"]
+  FEAS --> ECON["Implemented cashflow and ASIC breakeven; sensitivity workflow planned"]
+  CAT --> ECON
+  ECON --> PROP["Family hypotheses and falsification tests; measured ranking planned"]
+  PROP --> EXEC["External domain runner; private adapter planned"]
+  EXEC --> ING
+  RUN --> REP["Implemented JSON results and limitations; report publishing planned"]
+  CMP --> REP
+  ECON --> REP
+  classDef card fill:#111827,stroke:#94a3b8,color:#ffffff,stroke-width:2px;
+  class SRC,CAT,ULL,TICK,DOMAIN,ING,VAL,REJ,RUN,CMP,FEAS,ECON,PROP,EXEC,REP card;
+  linkStyle default stroke:#94a3b8,stroke-width:2px;

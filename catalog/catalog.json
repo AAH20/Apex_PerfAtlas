@@ -1,0 +1,340 @@
+{
+  "schema_version": "0.1.0",
+  "checked_on": "2026-09-30",
+  "scope": "Public benchmark-family catalogue, not the complete private metric/specification catalogue. No official STAC harness is implemented or redistributed.",
+  "benchmark_families": [
+    {
+      "id": "STAC-N1",
+      "public_scope": "Market-data network stack I/O",
+      "source": "https://docs.stacresearch.com/nio",
+      "execution_status": "not_run",
+      "specification_status": "authorized_version_required",
+      "optimization_hypothesis": "Pin NIC, CPU placement and bypass mode; test polling, batching and queue placement.",
+      "falsification": "Run the applicable authorized workload; disqualify improvement if correctness, quality, traffic or recovery constraints change.",
+      "predicted_result": null
+    },
+    {
+      "id": "STAC-T0",
+      "public_scope": "Actionable tick-to-trade network I/O",
+      "source": "https://docs.stacresearch.com/nio",
+      "execution_status": "not_run",
+      "specification_status": "authorized_version_required",
+      "optimization_hypothesis": "Evaluate direct MAC application logic, field position, integrity treatment and egress arbitration.",
+      "falsification": "Run the applicable authorized workload; disqualify improvement if correctness, quality, traffic or recovery constraints change.",
+      "predicted_result": null
+    },
+    {
+      "id": "STAC-T1",
+      "public_scope": "Market-specific tick-to-trade application logic",
+      "source": "https://docs.stacresearch.com/t1",
+      "execution_status": "not_run",
+      "specification_status": "authorized_version_required",
+      "optimization_hypothesis": "Optimize the actual strategy and risk workload with state hazards and session guarantees preserved.",
+      "falsification": "Run the applicable authorized workload; disqualify improvement if correctness, quality, traffic or recovery constraints change.",
+      "predicted_result": null
+    },
+    {
+      "id": "STAC-M1",
+      "public_scope": "Direct-feed normalization and distribution",
+      "source": "https://docs.stacresearch.com/m1",
+      "execution_status": "not_run",
+      "specification_status": "authorized_version_required",
+      "optimization_hypothesis": "Fuse decode and normalization; retain book semantics, burst behavior and subscriber distribution.",
+      "falsification": "Run the applicable authorized workload; disqualify improvement if correctness, quality, traffic or recovery constraints change.",
+      "predicted_result": null
+    },
+    {
+      "id": "STAC-M2",
+      "public_scope": "Market-data messaging middleware",
+      "source": "https://docs.stacresearch.com/m2",
+      "execution_status": "not_run",
+      "specification_status": "authorized_version_required",
+      "optimization_hypothesis": "Investigate zero-copy distribution, bounded queues and fanout under the authorized workload.",
+      "falsification": "Run the applicable authorized workload; disqualify improvement if correctness, quality, traffic or recovery constraints change.",
+      "predicted_result": null
+    },
+    {
+      "id": "STAC-N2",
+      "public_scope": "Network I/O across data centers and cloud",
+      "source": "https://stacresearch.com/benchmarks/",
+      "execution_status": "not_run",
+      "specification_status": "authorized_version_required",
+      "optimization_hypothesis": "Study path placement, transport and loss behavior; local FPGA core speed cannot remove path delay.",
+      "falsification": "Run the applicable authorized workload; disqualify improvement if correctness, quality, traffic or recovery constraints change.",
+      "predicted_result": null
+    },
+    {
+      "id": "STAC-TS",
+      "public_scope": "Time synchronization and traceability",
+      "source": "https://docs.stacresearch.com/ts",
+      "execution_status": "not_run",
+      "specification_status": "authorized_version_required",
+      "optimization_hypothesis": "Calibrate clocks and timestamp boundaries; evaluate offset, holdover and traceability.",
+      "falsification": "Run the applicable authorized workload; disqualify improvement if correctness, quality, traffic or recovery constraints change.",
+      "predicted_result": null
+    },
+    {
+      "id": "STAC-A2",
+      "public_scope": "Compute-intensive risk computation",
+      "source": "https://docs.stacresearch.com/a2",
+      "execution_status": "not_run",
+      "specification_status": "authorized_version_required",
+      "optimization_hypothesis": "Profile vectorization, memory layout, CPU/GPU arithmetic and declared accuracy before heterogeneous offload.",
+      "falsification": "Run the applicable authorized workload; disqualify improvement if correctness, quality, traffic or recovery constraints change.",
+      "predicted_result": null
+    },
+    {
+      "id": "STAC-A3",
+      "public_scope": "Strategy backtesting",
+      "source": "https://docs.stacresearch.com/a3",
+      "execution_status": "not_run",
+      "specification_status": "authorized_version_required",
+      "optimization_hypothesis": "Investigate event ordering, data locality and execution parallelism without changing backtest semantics.",
+      "falsification": "Run the applicable authorized workload; disqualify improvement if correctness, quality, traffic or recovery constraints change.",
+      "predicted_result": null
+    },
+    {
+      "id": "STAC-M3",
+      "public_scope": "Enterprise tick analytics",
+      "source": "https://docs.stacresearch.com/m3",
+      "execution_status": "not_run",
+      "specification_status": "authorized_version_required",
+      "optimization_hypothesis": "Profile query plans, storage, compression and NUMA locality on the exact dataset and queries.",
+      "falsification": "Run the applicable authorized workload; disqualify improvement if correctness, quality, traffic or recovery constraints change.",
+      "predicted_result": null
+    },
+    {
+      "id": "STAC-ML",
+      "public_scope": "Financial machine-learning workloads",
+      "source": "https://docs.stacresearch.com/ml",
+      "execution_status": "not_run",
+      "specification_status": "authorized_version_required",
+      "optimization_hypothesis": "Evaluate CPU, GPU or FPGA inference with model identity, accuracy and batch policy fixed.",
+      "falsification": "Run the applicable authorized workload; disqualify improvement if correctness, quality, traffic or recovery constraints change.",
+      "predicted_result": null
+    },
+    {
+      "id": "STAC-AI",
+      "public_scope": "AI and language-model workloads in finance",
+      "source": "https://docs.stacresearch.com/ai",
+      "execution_status": "not_run",
+      "specification_status": "authorized_version_required",
+      "optimization_hypothesis": "Reuse domain inference runners; retain model quality, cache, concurrency and accepted-token semantics.",
+      "falsification": "Run the applicable authorized workload; disqualify improvement if correctness, quality, traffic or recovery constraints change.",
+      "predicted_result": null
+    }
+  ],
+  "hardware": [
+    {
+      "platform": "Cisco Nexus K3P-S",
+      "device": "XCKU3P-2",
+      "io": "2 SFP28; 10/25GbE candidate profiles",
+      "proposed_role": "Compact initial hardware target if development access is available",
+      "limitations": [
+        "Board capacity and timing closure must be established for the selected core.",
+        "Published 4 ns timestamp resolution does not establish sub-nanosecond measurement accuracy.",
+        "FDK, tool licensing, board revision and procurement remain access gates."
+      ],
+      "source": "https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/nexus-smartnic/datasheet-c78-743827.html"
+    },
+    {
+      "platform": "AMD Alveo U200 or U250",
+      "device": "Select exact SKU and revision before estimating resource or timing margins",
+      "proposed_role": "Alternative implementation platform when available",
+      "limitations": [
+        "A larger resource budget does not establish a lower PHY or pipeline latency.",
+        "Clock, transceiver, MAC, shell and license configuration are part of the result."
+      ],
+      "source": "https://docs.amd.com/r/en-US/ds962-u200-u250/FPGA-Resource-Information"
+    },
+    {
+      "platform": "AMD Alveo UL3524 A-UL3524-P16G-PQ-G",
+      "proposed_role": "Specialized low-latency research platform after the portable design works",
+      "limitations": [
+        "Device capability is not an Apex_Tick performance result.",
+        "Device IP, board access, tool support, measurement instrument and commercial terms must be confirmed."
+      ],
+      "sources": [
+        "https://www.amd.com/en/products/accelerators/alveo/ul3524/a-ul3524-p16g-pq-g.html",
+        "https://docs.stacresearch.com/news/AMD240422"
+      ]
+    },
+    {
+      "platform": "eFPGA or hybrid/custom ASIC",
+      "proposed_role": "Partner-funded feasibility and later silicon path",
+      "limitations": [
+        "No performance prediction from process-node or DUV/EUV labels alone.",
+        "Require qualified macro/PDK, tool access, corner analysis, package and die-boundary costs.",
+        "NRE, verification, physical design, yield, test and deployment volumes determine economics.",
+        "A simulated or placed-and-routed design remains distinct from measured silicon."
+      ]
+    }
+  ],
+  "libraries": [
+    {
+      "name": "Corundum",
+      "source": "https://docs.corundum.io/en/latest/modules/mqnic_app_block.html",
+      "candidate_role": "MAC-direct FPGA application interface",
+      "limitations": [
+        "Interface clock domain and exact RTL revision must be pinned.",
+        "A NIC framework does not supply a verified exchange strategy or session."
+      ],
+      "integration_status": "candidate"
+    },
+    {
+      "name": "Taxi",
+      "source": "https://github.com/fpganinja/taxi",
+      "candidate_role": "Ethernet RTL components",
+      "limitations": [
+        "Verify implemented components, license obligations and board support at the pinned revision.",
+        "Do not infer a production TCP session from an Ethernet component."
+      ],
+      "integration_status": "candidate"
+    },
+    {
+      "name": "DPDK",
+      "source": "https://doc.dpdk.org/guides/",
+      "candidate_role": "Native polling transport backend",
+      "limitations": [
+        "PMD, NIC SKU, hugepages, queue placement and polling CPU are part of configuration.",
+        "Apex_ULL real DPDK backend currently rejects initialization."
+      ],
+      "integration_status": "not_implemented"
+    },
+    {
+      "name": "AF_XDP",
+      "source": "https://www.kernel.org/doc/html/latest/networking/af_xdp.html",
+      "candidate_role": "Linux packet I/O backend",
+      "limitations": [
+        "Copy and zero-copy are distinct modes.",
+        "Driver capabilities and actual activated mode must be measured and recorded."
+      ],
+      "integration_status": "candidate"
+    },
+    {
+      "name": "Onload",
+      "source": "https://github.com/Xilinx-CNS/onload",
+      "candidate_role": "Accelerated socket-stack comparison",
+      "limitations": [
+        "Record NIC, driver and supported acceleration path.",
+        "A library install does not establish real accelerated traffic."
+      ],
+      "integration_status": "candidate"
+    },
+    {
+      "name": "Aeron",
+      "source": "https://aeron.io/docs/aeron/publications-subscriptions/",
+      "candidate_role": "Messaging distribution experiments",
+      "limitations": [
+        "Reliable transport, buffering, backpressure and publication/subscription semantics differ from raw packet I/O."
+      ],
+      "integration_status": "candidate"
+    },
+    {
+      "name": "DuckDB",
+      "source": "https://duckdb.org/docs/current/guides/performance/how_to_tune_workloads",
+      "candidate_role": "Open analytics experiments",
+      "limitations": [
+        "SQL/dataset equivalents do not automatically meet licensed STAC-M3 specifications."
+      ],
+      "integration_status": "candidate"
+    },
+    {
+      "name": "vLLM / TensorRT-LLM",
+      "sources": [
+        "https://github.com/vllm-project/vllm",
+        "https://github.com/NVIDIA/TensorRT-LLM"
+      ],
+      "candidate_role": "Domain-owned AI inference backends",
+      "limitations": [
+        "Pin model, precision, quality, cache and batching.",
+        "No inference runner is duplicated in Atlas."
+      ],
+      "integration_status": "candidate"
+    }
+  ],
+  "process_and_package": {
+    "duv_euv_source": "https://www.asml.com/en/products/euv-lithography-systems",
+    "policy": "Record process and exposure metadata per layer when documented; it is not a predictor of trading latency.",
+    "efpga_source": "https://www.achronix.com/product/speedcore",
+    "required_qualified_evidence": [
+      "macro and PDK revision",
+      "licensed tool access",
+      "qualified corners",
+      "physical timing and area",
+      "package interconnect model",
+      "yield and production test assumptions"
+    ],
+    "hybrid_boundaries": [
+      "die crossing",
+      "clock crossing",
+      "serializer/deserializer",
+      "package and board I/O",
+      "thermal and power envelope"
+    ],
+    "numeric_latency_or_cost_without_evidence": null
+  },
+  "cost_model": {
+    "input_record_fields": [
+      "value_or_null",
+      "unit",
+      "currency",
+      "source_url_or_private_quote",
+      "quote_date",
+      "validity_period",
+      "region",
+      "quantity_tier",
+      "tax_treatment",
+      "included_services",
+      "confidence",
+      "scenario_range"
+    ],
+    "missing_cost_policy": "Unknown remains null, never zero. Public output may show authorized ranges rather than restricted quotes.",
+    "expected_outage_cost": "annual_incident_rate * mean_hours_per_incident * loss_per_hour; alternatively use annual downtime fraction * hours_per_year * loss_per_hour, with the different meaning recorded",
+    "npv": "-initial_investment + sum(discounted_incremental_cashflow_t) + discounted_residual_value; no double counting of amortization and initial cash investment",
+    "payback": "first period when cumulative net cashflow becomes nonnegative, with interpolation policy recorded; unknown if business cashflow is unknown",
+    "asic_break_even": "NRE / (FPGA_fully_loaded_unit_cost - ASIC_fully_loaded_unit_cost), only for positive denominator and comparable functionality; capacity and risk assumptions remain separate",
+    "energy_per_operation": "average_power_W / completed_operations_per_second gives J/op; report baseline system power and measurement boundary",
+    "colocation_items": [
+      "cabinet",
+      "power_committed_and_metered",
+      "exchange_handoff",
+      "cross_connect",
+      "logical_ports",
+      "market_data_entitlements",
+      "setup",
+      "remote_hands",
+      "spares",
+      "support",
+      "measurement_instrument",
+      "taxes"
+    ],
+    "colocation_benefits": [
+      "Record physical distance, connection path and operational access only when documented.",
+      "Do not assign unmeasured queue priority, profit or nanosecond value to a colocation perk."
+    ]
+  },
+  "colocation_sources": [
+    {
+      "operator": "Nasdaq",
+      "source": "https://www.nasdaqtrader.com/trader.aspx?id=pricelisttrading2",
+      "price_status": "configuration-specific tariff or quote required"
+    },
+    {
+      "operator": "CME",
+      "source": "https://www.cmegroup.com/solutions/co-location.html",
+      "price_status": "quote required"
+    },
+    {
+      "operator": "ICE",
+      "source": "https://www.ice.com/fixed-income-data-services/access-and-delivery/connectivity-and-feeds/icecolocation",
+      "price_status": "quote required"
+    }
+  ],
+  "limitations": [
+    "The catalogue covers named public families; premium metrics and specifications are not accessible here.",
+    "Hardware and library integrations are candidates, not implemented backends.",
+    "Vendor timing, internal simulation and external results remain distinct.",
+    "No claim to exceed all STAC benchmarks or to predict contract revenue."
+  ]
+}

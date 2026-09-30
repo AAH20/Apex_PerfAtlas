@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "apex-perfatlas"
+version = "0.1.0"
+description = "Performance evidence validation, comparison eligibility and deployment economics"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+readme = "README.md"
+authors = [{name = "Ahmed Hassan"}]
+dependencies = ["jsonschema>=4.22,<5"]
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+[project.scripts]
+apex-atlas = "apex_perfatlas.cli:main"
+[tool.setuptools.packages.find]
+where = ["src"]
+[tool.setuptools.package-data]
+apex_perfatlas = ["data/*.json"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

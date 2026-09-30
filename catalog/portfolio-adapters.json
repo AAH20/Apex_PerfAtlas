@@ -1,0 +1,77 @@
+{
+  "relationship_policy": "All relationships below are proposed, not implemented or validated. Each original repository retains its domain and maintenance status.",
+  "relationships": [
+    {
+      "repository": "hft-microstructure-kernel",
+      "interface": "Synthetic market scenarios and reference fixtures",
+      "destination": "Apex_Tick",
+      "status": "candidate"
+    },
+    {
+      "repository": "apex-quant-whale-kernel",
+      "interface": "Policy and simulation fixtures",
+      "destination": "Apex_Tick",
+      "status": "candidate"
+    },
+    {
+      "repository": "ApexGraphSwarm",
+      "interface": "Offline engineering experiment planning",
+      "destination": "Apex_PerfAtlas",
+      "status": "candidate"
+    },
+    {
+      "repository": "frontier-ai-compiler-kernel",
+      "interface": "Offline optimization proposals, not qualified physical implementation",
+      "destination": "Apex_PerfAtlas",
+      "status": "candidate"
+    },
+    {
+      "repository": "llm-inference-benchmark",
+      "interface": "Domain-owned benchmark evidence adapter; retain existing runner",
+      "destination": "Apex_PerfAtlas",
+      "status": "candidate"
+    },
+    {
+      "repository": "ai-factory-revenue-twin",
+      "interface": "Capacity and economics scenarios with synthetic/live provenance",
+      "destination": "Apex_PerfAtlas",
+      "status": "candidate"
+    },
+    {
+      "repository": "network-change-intelligence-twin",
+      "interface": "Connectivity and failure scenarios",
+      "destination": "Apex_PerfAtlas",
+      "status": "candidate"
+    },
+    {
+      "repository": "datacenter-np-hard-kernel",
+      "interface": "Placement, power and capacity scenarios",
+      "destination": "Apex_PerfAtlas",
+      "status": "candidate"
+    },
+    {
+      "repository": "GRC_Claw",
+      "interface": "Evidence custody and authorization receipts outside the packet path",
+      "destination": "Apex_PerfAtlas",
+      "status": "candidate"
+    },
+    {
+      "repository": "apex-swarm-orchestrator-kernel",
+      "interface": "Offline build and experiment scheduling",
+      "destination": "Apex_PerfAtlas",
+      "status": "candidate"
+    },
+    {
+      "repository": "apex-mcp-gateway-kernel",
+      "interface": "Read-only evidence queries",
+      "destination": "Apex_PerfAtlas",
+      "status": "candidate"
+    },
+    {
+      "repository": "apex-infrastructure-killswitch-kernel",
+      "interface": "Separate protection scenarios; no assumed validated trading kill switch",
+      "destination": "Apex_PerfAtlas",
+      "status": "candidate"
+    }
+  ]
+}

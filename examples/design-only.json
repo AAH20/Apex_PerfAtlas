@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1.0",
+  "run_id": "apex-tick-open-v0-design-example",
+  "status": "not_run",
+  "claim_kind": "target",
+  "provenance": {"repository_url": null, "commit": null, "dirty": null, "config_sha256": null, "recorded_at": "2026-09-30T00:00:00Z", "sources": []},
+  "workload": {"id": "apex.tick.open", "version": "0.1-draft", "kind": "open", "spec_sha256": null, "input_sha256": null, "rights": "public_redistributable", "semantics": "Proposed bounded synthetic UDP top-of-book trigger with simulated orders; independent specification and fixtures still to be authored.", "frame_integrity_policy": "validate_before_action"},
+  "platform": {"inventory_artifact": null, "implementation_artifact": null, "transport_backend": null, "backend_status": "not_present"},
+  "evidence": {"implementation": "design_only", "environment": "not_run", "validation": "none", "validation_receipt": null},
+  "measurement": {"method": "none", "start_boundary": null, "stop_boundary": null, "clock_artifact": null, "calibration_artifact": null, "resolution_ns": null, "uncertainty_artifact": null, "warmup_policy": null, "sampling_policy": null, "sample_count": 0},
+  "traffic": {"schedule_artifact": null, "offered_count": null, "accepted_count": null, "completed_count": null, "rejected_count": null, "dropped_count": null, "duplicate_output_count": null, "wrong_output_count": null, "unresolved_count": null},
+  "metrics": [],
+  "artifacts": [],
+  "limitations": ["Design example only; no implementation or performance result is represented.", "The timestamp labels the draft record date and is not an execution timestamp."]
+}

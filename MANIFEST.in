@@ -1,0 +1,5 @@
+include README.md LICENSE NOTICE
+recursive-include contracts *.json *.py *.sv *.md *.mmd *.svg
+recursive-include catalog *.json *.py *.sv *.md *.mmd *.svg
+recursive-include examples *.json *.py *.sv *.md *.mmd *.svg
+recursive-include docs *.json *.py *.sv *.md *.mmd *.svg
