@@ -336,5 +336,59 @@
     "Hardware and library integrations are candidates, not implemented backends.",
     "Vendor timing, internal simulation and external results remain distinct.",
     "No claim to exceed all STAC benchmarks or to predict contract revenue."
+  ],
+  "public_system_references": [
+    {
+      "family": "STAC-N1",
+      "posted": "2026-09-28",
+      "configuration": "Intel Xeon Gold 6558Q; AMD Solarflare X4542-PLUS NIC; Jabil J322-S server",
+      "source": "https://stacresearch.com/benchmarks/",
+      "source_scope": "Public report listing; detailed configuration not inspected",
+      "apex_execution_status": "not_run",
+      "planning_constraints": [
+        "Exact BIOS, firmware, NIC mode, workload and licensed implementation required.",
+        "A host-network result is not a MAC-to-MAC FPGA trading result."
+      ],
+      "cost_quote": null
+    },
+    {
+      "family": "STAC-AI",
+      "posted": "2026-05-20",
+      "configuration": "Lambda 1-Click Cluster cloud instance; 8 NVIDIA B200 SXM6 GPUs",
+      "source": "https://stacresearch.com/news/stac-ai-benchmark-results-on-lambda-1-click-cluster-cloud-instance-with-nvidia-b200-sxm6-blackwell-series-gpus/",
+      "source_scope": "Public audited report announcement; subscriber configuration not inspected",
+      "apex_execution_status": "not_run",
+      "planning_constraints": [
+        "Freeze model, precision, output-quality standard, load and accepted-work denominator.",
+        "Cloud topology, reservation, tenancy, energy boundary and effective rental quote need separate evidence."
+      ],
+      "cost_quote": null
+    },
+    {
+      "family": "STAC-A2",
+      "posted": "2026-05-20",
+      "configuration": "HPE ProLiant Compute XD230; Intel Xeon 6980P; Micron MRDIMMs",
+      "source": "https://stacresearch.com/news/stac-a2-on-hpe-proliant-compute-xd230-with-intel-xeon-6980p-processors-and-micron-mrdimms/",
+      "source_scope": "Public audited report announcement; full configuration not inspected",
+      "apex_execution_status": "not_run",
+      "planning_constraints": [
+        "Cooling, exact memory population, workload size, cold/warm policy and numerical-quality standard required.",
+        "A risk-computation system does not predict tick-to-trade I/O latency."
+      ],
+      "cost_quote": null
+    },
+    {
+      "family": "STAC-ML",
+      "posted": "2026-05-13",
+      "configuration": "Xelera Silva; AMD Alveo V80; HPE Proliant DL385 Gen10 Plus v2",
+      "source": "https://stacresearch.com/news/stac-ml-with-xelera-silva-together-with-amd-alveo-v80-and-an-hpe-proliant-dl385-gen10-plus-v2/",
+      "source_scope": "Public audited report announcement; full configuration not inspected",
+      "apex_execution_status": "not_run",
+      "planning_constraints": [
+        "Licensed pack, exact model revision, accuracy, model-instance count and hardware implementation required.",
+        "The V80 inference stack does not establish an equivalent trading-core platform contract."
+      ],
+      "cost_quote": null
+    }
   ]
 }

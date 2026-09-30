@@ -19,3 +19,35 @@ jobs:
       - run: apex-atlas suggest STAC-T0
       - run: apex-atlas economics examples/cost-scenario.json
       - run: python -m build
+
+  ecosystem-contracts:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -e .
+      - uses: actions/checkout@v4
+        with:
+          repository: AAH20/Apex_ULL
+          ref: 93ae4eddf9e7530c7f8cd074fc1c0610c124e2de
+          path: integrations/ull
+      - uses: actions/checkout@v4
+        with:
+          repository: AAH20/Apex_Tick
+          ref: 1b665d3a0ec1fc106525edcece8a43b7254244e1
+          path: integrations/tick
+      - run: apex-atlas validate integrations/ull/evidence/host-software/2026-09-30/run.json
+      - run: apex-atlas validate integrations/tick/evidence/simulation/2026-09-30/run.json
+      - run: python integrations/ull/scripts/export_atlas_run.py --output output/native-replay --iterations 10000 --warmup 1000 --batch-size 1024
+      - run: apex-atlas validate output/native-replay/run.json
+      - run: sudo apt-get update && sudo apt-get install -y iverilog
+      - run: pip install -e integrations/tick
+      - run: python integrations/tick/verification/emit_evidence.py --output output/simulation-replay --seed 17 --cycles 800
+      - run: apex-atlas validate output/simulation-replay/run.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: regenerated-ecosystem-evidence
+          path: output/
+          if-no-files-found: error

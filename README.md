@@ -42,6 +42,8 @@ Cisco K3P-S uses XCKU3P-2, two SFP28 ports and published 4 ns timestamp resoluti
 
 For eFPGA and hybrid/custom ASICs, require a qualified macro/PDK, tools, corners, physical implementation, die/package crossing models, yield and test assumptions. DUV/EUV exposure belongs in layer-specific process metadata, not a trading-latency prediction. [Achronix Speedcore](https://www.achronix.com/product/speedcore), [ASML EUV](https://www.asml.com/en/products/euv-lithography-systems).
 
+The catalogue also records current public system references for host-network I/O, risk computation, ML inference and LLM inference, with source date, access limits and unknown quotes. They are planning references, not Apex adapters or a single recommended platform. [STAC report index](https://stacresearch.com/benchmarks/).
+
 ## Deployment economics
 
 Unknown inputs remain null. Every real cost input needs date, scope, currency, source/quote, validity, quantity tier and tax treatment. The example contains explicitly fictional assumptions. The implemented calculator reports constant-cashflow NPV, expected outage cost and undiscounted payback; it does not infer revenue from latency.
